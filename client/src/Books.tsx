@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 type Book = {
   title: string;
   author: string;
-  century: number;
+  year: number;
 };
 
 const BOOKS_QUERY = gql`
@@ -10,20 +10,30 @@ const BOOKS_QUERY = gql`
     books {
       title
       author
-      century
+      year
     }
   }
 `;
 
+// const INTRO_QUERY = gql`
+//   query Query($intro: String) {
+//     introduction(intro: $intro)
+//   }
+// `;
+
 const Books = () => {
   const { data, loading, error } = useQuery(BOOKS_QUERY);
+  // const { data, loading, error } = useQuery(INTRO_QUERY, {
+  //   variables: { intro: "he is a 21 century sci-fi author" },
+  // });
 
   if (loading) return <p>Loading...</p>;
   if (error) {
-    console.error("BOOKS_QUERY error", error);
+    console.error("INTRO_QUERY error", error);
     return <>{error.message}</>;
   } else {
     return (
+      // <div>{data.introduction}</div>
       <div>
         {data.books.map((b: Book, i: number) => {
           {
@@ -37,7 +47,7 @@ const Books = () => {
               >
                 <div>{b.title}</div>
                 <div>{b.author}</div>
-                <div>{b.century}</div>
+                <div>{b.year}</div>
               </div>
             );
           }
