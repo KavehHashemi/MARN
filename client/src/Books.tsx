@@ -1,19 +1,6 @@
-import { gql, useQuery } from "@apollo/client";
-type Book = {
-  title: string;
-  author: string;
-  year: number;
-};
-
-const BOOKS_QUERY = gql`
-  query Query {
-    books {
-      title
-      author
-      year
-    }
-  }
-`;
+import { useMutation, useQuery } from "@apollo/client";
+import { Book } from "./Types";
+import { BOOKS_QUERY, DELETE_BOOK_MUTATION } from "./graphql";
 
 // const INTRO_QUERY = gql`
 //   query Query($intro: String) {
@@ -23,6 +10,17 @@ const BOOKS_QUERY = gql`
 
 const Books = () => {
   const { data, loading, error } = useQuery(BOOKS_QUERY);
+  const [deleteMutation] = useMutation(DELETE_BOOK_MUTATION, {
+    refetchQueries: [{ query: BOOKS_QUERY }],
+  });
+
+  const DeleteBook = (id: number) => {
+    deleteMutation({
+      variables: {
+        id: id,
+      },
+    });
+  };
   // const { data, loading, error } = useQuery(INTRO_QUERY, {
   //   variables: { intro: "he is a 21 century sci-fi author" },
   // });
@@ -35,19 +33,23 @@ const Books = () => {
     return (
       // <div>{data.introduction}</div>
       <div>
-        {data.books.map((b: Book, i: number) => {
+        {data.books.map((b: Book) => {
           {
             return (
               <div
-                key={i}
+                key={b.id}
                 style={{
                   borderBottom: "1px dashed grey",
                   marginBottom: "1rem",
                 }}
+                onClick={() => console.log(b)}
               >
-                <div>{b.title}</div>
-                <div>{b.author}</div>
-                <div>{b.year}</div>
+                <div>title: {b.title}</div>
+                <div>author: {b.author}</div>
+                <div>year: {b.year}</div>
+                <button onClick={() => DeleteBook(b.id as unknown as number)}>
+                  Remove
+                </button>
               </div>
             );
           }

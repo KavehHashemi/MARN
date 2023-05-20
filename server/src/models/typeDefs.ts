@@ -10,4 +10,9 @@ export const typeDefs = `#graphql
     books: [Book]
     introduction(intro:String):String  
   }
+
+  type Mutation {
+        create(title: String, author:String, year: Int): Book
+        delete(id:ID):ID
+    }
 `;
