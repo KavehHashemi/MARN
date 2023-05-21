@@ -1,5 +1,6 @@
+import "./index.css";
 import { useState } from "react";
-import { Book } from "./Types";
+import { BookType } from "./Types";
 import { useMutation } from "@apollo/client";
 import { CREATE_BOOK_MUTATION, BOOKS_QUERY } from "./graphql";
 
@@ -7,7 +8,7 @@ const CreateBook = () => {
   const [createMutation] = useMutation(CREATE_BOOK_MUTATION, {
     refetchQueries: [{ query: BOOKS_QUERY }],
   });
-  const [book, setBook] = useState<Book>({
+  const [book, setBook] = useState<BookType>({
     id: "",
     author: "",
     title: "",
@@ -29,7 +30,7 @@ const CreateBook = () => {
 
   return (
     <div>
-      <form onSubmit={(e) => AddBook(e)}>
+      <form className="form" onSubmit={(e) => AddBook(e)}>
         <label htmlFor="title">Title</label>
         <input
           type="string"

@@ -1,4 +1,5 @@
 :root {
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -19,6 +20,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -26,9 +28,6 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -47,12 +46,52 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.navbar {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  height: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 1px #a3a3a3;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem;
 }
 
 @media (prefers-color-scheme: light) {
@@ -60,9 +99,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }

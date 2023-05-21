@@ -21,5 +21,15 @@ export const resolvers = {
       }
       return null;
     },
+    edit: async (_, { id, title, author, year }) => {
+      const result = await Book.updateOne(
+        { _id: id },
+        { $set: { author, title, year } }
+      );
+      if (result.acknowledged && result.modifiedCount === 1) {
+        return await Book.findOne({ _id: id });
+      }
+      return null;
+    },
   },
 };
